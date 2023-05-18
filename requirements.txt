@@ -1,0 +1,4 @@
+aiogram==2.25.1
+mysql_connector_repackaged==0.3.1
+pymysql==1.0.3
+mysql-connector-python=8.0.33
