@@ -1,7 +1,5 @@
 from aiogram import types
 
-from userData import User, UserKeys
-
 
 def get_keyboard(answers, sub):
     buttons = [types.InlineKeyboardButton(text=a[0], callback_data=sub + str(a[1])) for a in answers]

@@ -4,14 +4,15 @@ import asyncio
 from aiogram import Dispatcher
 from aiogram.dispatcher.filters import Text
 
+from bot_handlers.expriredHandler import scheduler_expired_notifier
 from commands import Commands
 from config.botConfig import dp
 from bot_handlers.botHandler import cmd_start, cmd_pause_bot, cmd_edit_settings
-from bot_handlers.mainHandler import cmd_start
+from bot_handlers.mainHandler import cmd_start_messages
 
 
 def register_handlers_common(dp: Dispatcher):
-    dp.register_message_handler(cmd_start, commands=Commands.START, state="*")
+    dp.register_message_handler(cmd_start_messages, commands=Commands.START, state="*")
 
 
 def register_handlers_main(dp: Dispatcher):
@@ -24,6 +25,7 @@ async def main():
     # Регистрация хэндлеров
     register_handlers_common(dp)
     register_handlers_main(dp)
+    asyncio.create_task(scheduler_expired_notifier())
 
     # Запуск поллинга
     await dp.start_polling()
